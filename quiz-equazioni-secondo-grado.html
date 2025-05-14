@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Equazioni di Secondo Grado</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .result {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .report {
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Quiz: Equazioni di Secondo Grado</h2>
+
+    <form id="quizForm">
+        <div class="question">
+            <p>1. Qual è la forma canonica di un'equazione di secondo grado?</p>
+            <label><input type="radio" name="q1" value="a"> ax + b = 0</label><br>
+            <label><input type="radio" name="q1" value="b"> ax² + bx + c = 0</label><br>
+            <label><input type="radio" name="q1" value="c"> ax² = c</label>
+        </div>
+
+        <div class="question">
+            <p>2. Se il discriminante è negativo (Δ &lt; 0), quante soluzioni reali ha l'equazione?</p>
+            <label><input type="radio" name="q2" value="a"> Una</label><br>
+            <label><input type="radio" name="q2" value="b"> Due distinte</label><br>
+            <label><input type="radio" name="q2" value="c"> Nessuna</label>
+        </div>
+
+        <div class="question">
+            <p>3. Qual è la formula risolutiva dell'equazione ax² + bx + c = 0?</p>
+            <label><input type="radio" name="q3" value="a"> x = -b / a</label><br>
+            <label><input type="radio" name="q3" value="b"> x = (-b ± √Δ) / (2a)</label><br>
+            <label><input type="radio" name="q3" value="c"> x = √(a² + b²)</label>
+        </div>
+
+        <div class="question">
+            <p>4. L'equazione x² - 4x + 4 = 0 ha:</p>
+            <label><input type="radio" name="q4" value="a"> Due soluzioni distinte</label><br>
+            <label><input type="radio" name="q4" value="b"> Nessuna soluzione reale</label><br>
+            <label><input type="radio" name="q4" value="c"> Una soluzione doppia</label>
+        </div>
+
+        <div class="question">
+            <p>5. Se a = 0, l'equazione ax² + bx + c = 0 diventa:</p>
+            <label><input type="radio" name="q5" value="a"> Un'equazione di primo grado</label><br>
+            <label><input type="radio" name="q5" value="b"> Un'identità</label><br>
+            <label><input type="radio" name="q5" value="c"> Un'equazione di terzo grado</label>
+        </div>
+
+        <button type="button" onclick="valutaRisposte()">Conferma e Calcola Risultato</button>
+    </form>
+
+    <div class="result" id="risultato"></div>
+    <div class="report" id="report"></div>
+
+    <script>
+        function valutaRisposte() {
+            const risposteCorrette = {
+                q1: "b",
+                q2: "c",
+                q3: "b",
+                q4: "c",
+                q5: "a"
+            };
+
+            let punteggio = 0;
+            let report = "";
+            for (let i = 1; i <= 5; i++) {
+                const domanda = document.querySelector(`input[name="q${i}"]:checked`);
+                if (domanda) {
+                    const risposta = domanda.value;
+                    if (risposta === risposteCorrette["q" + i]) {
+                        punteggio++;
+                        report += `<p>Domanda ${i}: Corretto</p>`;
+                    } else {
+                        report += `<p>Domanda ${i}: Errato (Risposta corretta: ${risposteCorrette["q" + i]})</p>`;
+                    }
+                } else {
+                    report += `<p>Domanda ${i}: Non risposto</p>`;
+                }
+            }
+
+            document.getElementById("risultato").innerHTML = `Hai totalizzato ${punteggio} su 5.`;
+            document.getElementById("report").innerHTML = report;
+        }
+    </script>
+
+</body>
+</html>
